@@ -1,0 +1,239 @@
+\chapter{Introduction}
+
+\section{Solutions}
+\begin{exer}
+A mathematical model that describles a wide variety of physical nonlinear systems is the 
+\textit{n}th-order differential equation
+\begin{equation*}
+y^{(n)}=g\left(t,y,\dot{y},\dots,y^{(n-1)},u\right)
+\end{equation*}
+where $u$ and $y$ are scalar variables. With $u$ as input and $y$ as output, find a state model.
+\end{exer}
+ 
+\begin{solution}
+Let $x_1=y$, we obtain the state model
+\begin{align*}
+\dot{x}_1 & = x_2\\ 
+\dot{x}_2 & = x_3\\
+\cdots \\
+\dot{x}_n & = g(t,x_1,x_2,\dots,x_{n-1},u)
+\end{align*}
+\end{solution}
+
+\begin{exer}
+Consider a SISO system described by the \textit{n}th-order differential equation
+\begin{equation*}
+y^{(n)}=g_1\left(t,y,\dot{y},\dots,y^{(n-1)},u\right)+g_2\left(t,y,\dot{y},\dots,y^{(n-2)}\right)\dot{u}
+\end{equation*}
+\end{exer} 
+
+\begin{solution}
+Let $x_1=y,z_1=u$, we obtain the state model
+\begin{align*}
+\dot{z}_1 & = z_2\\
+\dot{x}_1 & = x_2\\ 
+\dot{x}_2 & = x_3\\
+\cdots \\
+\dot{x}_n & = g_1(t,x_1,x_2,\dots,x_{n-1},z_1)+g_2(t,x_1,x_2,\dots,x_{n-2})z_2
+\end{align*}
+\end{solution}
+
+\begin{exer}
+Consider a SISO system described by the \textit{n}th-order differential equation
+\begin{equation*}
+y^{(n)}=g\left(y,\dot{y},\dots,y^{(n-1)},z,\dots,z^{(m)}\right)
+\end{equation*}
+where $z$ is the input and $y$ is the output. Extend the dynamics of the system by 
+adding a series of $m$ integrators at the input side and define $u=z^{(m)}$ as the
+input to the extended system, see Figure 1.17. Using $y,\dot{y},\dots,y^{(n-1)}$ 
+and $z,\dots,z^{(m)}$ as state variables, find a state model of the extended system.
+\end{exer}
+
+\begin{solution}
+Let $x_1=y,z_1=z$, we obtain the state model
+\begin{align*}
+\dot{z}_1 & = z_2\\
+\cdots \\
+\dot{z}_{m-1} & = z_m\\
+\dot{x}_1 & = x_2\\ 
+\dot{x}_2 & = x_3\\
+\cdots \\
+\dot{x}_n & = g(x_1,x_2,\dots,x_{n-1},z_1,\dots,z_{m})
+\end{align*}
+\end{solution}
+
+\begin{exer}
+The nonlinear dynamic equations for an \textit{m} take the form
+\begin{equation*}
+M(q)\ddot{q}+C(q,\dot{q})\dot{q}+D\dot{q}+g(q)=u
+\end{equation*}
+where $q$ is an $m$-dimensional vector of generalized coordinates representing joint
+positions, $u$ is an $m$-dimensional vector of control (torque) input, and $M(q)$ is
+a symmetric inertia matrix, which is positive definete for all $q\in\mathbb{R}^m$.
+The term $C(q,\dot{q})\dot{q}$ accounts for centrifugal and Coriolis forces. The 
+matrix $C$ has the property the $\dot{M}-2C$ is a skew-symmetric matrix for all 
+$q,\dot{q}\in\mathbb{R}^m$. The term $D\dot{q}$ account for viscous damping, where 
+$D$ is a positive semidefinite symmetric matrx. The term $g(q)$, which accounts for
+gravity forces, is given by $g(p)=\left[\partial P(q)/\partial q\right]$, where $P$
+is the total potential energy of the links due to gravity. Choose appropriate state
+variables and find the state equation.
+\end{exer}
+
+\begin{solution}
+Let the momentum be$p=M(q)\dot{q}$ and Hamiltonian be 
+$H(q,p)=\frac{1}{2}P^TM(q)^{-1}p+P(q)$, then we obtain the state model
+\begin{align*}
+\dot{q} & = \frac{\partial H}{\partial p} \\
+\dot{p} & =-\frac{\partial H}{\partial q} - DM^{-1}p + u
+\end{align*}
+\end{solution}
+
+\begin{exer}
+The nonlinear dynamic equations for a single-link manipulator with flexible joints,
+damping ignored, is given by
+\begin{align*}
+I\ddot{q}_1 + MgL\sin q_1 + k(q_1-q_2) &= 0 \\
+J\ddot{q}_2 - k(q_1-q_2) &= u
+\end{align*}
+where $q_1$ and $q_2$ are angular positions, $I$ and $J$ are moments of inertia, $k$
+is a spring constant, $M$ is the total mass, $L$ is a distance, and $u$ is a torque
+input. Choose state variables for this system and write down the state equation.
+\end{exer}
+
+\begin{solution}
+Let $x_1=q_1, x_2=I\dot{q}_1, x_3=q_2, x_4=J\dot{q}_2$, we obtain the state model
+\begin{align*}
+\dot{x}_1 &= x_2/I \\
+\dot{x}_2 &= -MgL\sin x_1 + k(x_1-x_3) \\
+\dot{x}_3 &= x_4/J \\
+\dot{x}_4 &= k(x_1-x_3) + u
+\end{align*}
+\end{solution}
+
+\begin{exer}
+The nonlinear dynamic equations take the form
+\begin{align*}
+M(q_1)\ddot{q}_1+h(q_1,\dot{q}_1) + K(q_1-q_2) &= 0 \\
+J\ddot{q}_2 - K(q_1-q_2) &= u
+\end{align*}
+Choose state variables and write down the state equation.
+\end{exer}
+
+\begin{solution}
+Let $x_1=q_1,x_2=\dot{q}_1,x_3=q_2,x_4=\dot{q}_2$, we obtain the state equation 
+\begin{align*}
+\dot{x}_1 &= x_2 \\
+\dot{x}_2 &= (-h(x_1,x_2)-K(x_1-x_3))/M(x_1) \\
+\dot{x}_3 &= x_4 \\
+\dot{x}_4 &= K/J(x_1-x_3)
+\end{align*}
+\end{solution}
+
+\begin{exer}
+Figure 1.18 shows a feedback connection of a LTI system ($G(s)$) and a nonlinear
+time-varying element defined by $z=\phi(t,y)$. The variable $r,u,y$ and $z$ are
+vectors of the same dimension, and $\phi(t,y)$ is a vector-valued function. Find a 
+state model.
+\end{exer}
+
+\begin{solution}
+The LTI system can be expressed as
+\begin{align*}
+\dot{x} &= Ax + Bu \\
+y &= Cx
+\end{align*}
+the feedback is $z=\phi(t,y)$ and control input $u=r-z$, we substitue these back 
+into the LTI and obtain
+\begin{align*}
+\dot{x} &= Ax + B(r-\phi(t,Cx)) \\
+y &= Cx
+\end{align*}
+\end{solution}
+
+\begin{exer}
+A synchronous generator connected to an infinite bus can be represented by
+\begin{align*}
+M\ddot{\delta} &= P - D\dot{\delta} - \eta_1E_q\sin\delta \\
+\tau\dot{E}_q  &= -\eta_2E_q + n_3\cos\delta + E_{FD}
+\end{align*}
+where $\delta$ is an angle in radians, $E_q$ is voltage, $P$ is mechanical input 
+power, $E_{FD}$ is field voltage (input), $D$ is damping coefficient, $M$ is
+inertial coefficient, $\tau$ is time constant, and $\eta_{1,2,3}$ are constant.
+\begin{enumerate}
+\item[(a)] Using $\delta, \dot{\delta}, E_q$ as state variables, find the state
+equation.
+\item[(b)] Let $P=0.815,E_{FD}=1.22,\eta_1=2.0,\eta_2=2.7,\eta_3=1.7,\tau=6.6,M=0.0147$
+and $D/M=4$. Find all equilibrium points.
+\item[(c)] Suppose that $\tau$ is relatively large so that $\dot{E}_q\approx 0.$ 
+Show that assuming $E_q$ to be constant reduces the model to a pendulum equation.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+The circuit shown in Figure 1.19 contains a nonlinear inductor and is driven by
+a time-dependent current source. Suppose that the nonlinear inductor is a 
+Josephson junction, described by $i_L=I_0\sin k\phi_L$, where $\phi_L$ is the 
+magnetic flux of the inductor and $I_0$ and $k$ are constants.
+\begin{enumerate}
+\item[(a)] Using $\phi_L$ and $v_C$ as state variables, find the state equation.
+\item[(b)] Is it easier to choose $i_L$ and $v_C$ as state variables?
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+The circuit shown in Figure 1.19 contains a nonlinear inductor and is driven by 
+a time-dependent current source. Suppose that the nonlinear inductor is described
+by $i_L=L\phi_L+\mu\phi_L^3$, where $\phi_L$ is the magnetic flux of the inductor
+and $L$ and $\mu$ are positive constants.
+\begin{enumerate}
+\item[(a)] Using $\phi_L$ and $v_C$ as state variables, find the state equation.
+\item[(b)] Find all equilibrium points when $i_S=0$.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+A phase-locked loop can be represented by the block diagram of Figure 1.20. Let
+$\{A,B,C\}$ be a minimal realization of the scalar, strictly proper transfer function
+$G(s)$. Assume that all eigenvalues of A have negative real parts, $G(0)\neq0$,
+and $\theta_i=$ constant. Let $z$ be the state of the realization $\{A,B,C\}$.
+\begin{enumerate}
+\item[(a)] Show that the closed-loop can be represented by the state equations \\
+$\dot{z}=Az+B\sin e, \dot{e}=-Cz$
+\item[(b)] Find all equilibrium points of the system.
+\item[(c)] Show that when $G(s)=1/(\tau s + 1)$, the closed-loop model coincides 
+with the model of a pendulum equation.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Consider the mass-spring system shown in Figure 1.21. Assume a linear spring and 
+nonlinear viscous damping described by $c_1\dot{y}+c_2\dot{y}|\dot{y}|$, find a 
+state equation that describes the motion of the system.
+\end{exer}
+
+\begin{exer}
+An example of a mechanical system in which friction can be negative in a certain 
+region is the structre shown in Figure 1.22. On a belt moving uniformly with
+velocity $v_0$, there lies a mass $m$ fixed by linear springs, with spring 
+constants $k_1$ and $k_2$. The friction force $h(v)$ exerted by the belt on the 
+mass is a function of the relative velocity $v=v_0-\dot{y}$. We assume that 
+$h(v)$ is a smooth function for $|v|>0$. In addition to this friction, assume
+that there is a linear viscous friction proportional to $\dot{y}$.
+\begin{enumerate}
+\item[(a)] Write down the eqation of motion of the mass $m$.
+\item[(b)] By restricting our analysis to the region $|\dot{y}| \ll v_0$, we
+can use a Taylor series to approximate $h(v)$ by $h(v_0)-\dot{y}h'(v_0)$. Using
+this approximation, simplify the model of the system.
+\item[(c)] In view of the friction models discussed in Section 1.3, describe 
+what kind of friction characteristic $h(v)$ would result in a system with 
+negative friction.
+\end{enumerate}
+\end{exer}
+
+\begin{exer}
+Figure 1.23 Shows a vehicle moving on a road with grade angle $\theta$, where $v$
+the vehicle's velocity, $M$ is its mass, and $F$ is the tractive force generated 
+by the engine. Assume that the friction is due to Coulomb friction, linear viscous
+friction, and a drag force proportional to $v^2$. Viewing $F$ as the control input 
+and $\theta$ as a disturbance input, find a state model of the system.
+\end{exer}

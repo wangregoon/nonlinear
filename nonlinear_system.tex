@@ -1,0 +1,29 @@
+\documentclass[12pt]{report}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{exer}{Problem}[chapter] 
+
+\newenvironment{solution}
+               {\let\oldqedsymbol=\qedsymbol
+                \renewcommand{\qedsymbol}{$\blacktriangleleft$}
+                \begin{proof}[\bfseries\upshape Solution]}
+               {\end{proof}
+                \renewcommand{\qedsymbol}{\oldqedsymbol}}
+ 
+\begin{document}
+ 
+\title{\textbf{Notes and Solutions} \\ \large \textit{H.K. Khalil's Nonlinear Systems}}
+\author{Regoon Wang, ChemE@UNSW \\ wang.regoon@gmail.com} 
+ 
+\maketitle
+
+\tableofcontents
+
+\include{chap1} 
+ 
+\end{document}
